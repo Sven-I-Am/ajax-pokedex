@@ -131,15 +131,26 @@ body {
         -moz-box-shadow: 0 0 10px #490000;
         -o-box-shadow: 0 0 10px #490000;
 
-        background: radial-gradient(#05fbfb, #29abe3);
-        background: -webkit-radial-gradient(#05fbfb, #29abe3);
-        background: -moz-radial-gradient(#05fbfb, #29abe3);
-        background: -o-radial-gradient(#05fbfb, #29abe3);
+
 
         border-radius: 35px;
         -webkit-border-radius: 35px;
         -moz-border-radius: 35px;
         -o-border-radius: 35px;
+    }
+
+    .powerButtonOn {
+        background: radial-gradient(#05fbfb, #29abe3);
+        background: -webkit-radial-gradient(#05fbfb, #29abe3);
+        background: -moz-radial-gradient(#05fbfb, #29abe3);
+        background: -o-radial-gradient(#05fbfb, #29abe3);
+    }
+
+    .powerButtonOff {
+        background: radial-gradient(#232525, #072b46);
+        background: -webkit-radial-gradient(#232525, #072b46);
+        background: -moz-radial-gradient(#232525, #072b46);
+        background: -o-radial-gradient(#232525, #072b46);
     }
 
     div#reflect
@@ -157,7 +168,7 @@ body {
 
     }
 
-    div#minipowerButton1
+    div#redLight
     {
         width: 20px;
         height: 20px;
@@ -174,13 +185,17 @@ body {
         -moz-border-radius: 20px;
         -o-border-radius: 20px;
 
+
+    }
+
+    .redLightOn {
         background: radial-gradient(#fb7b7b, #fb0505);
         background: -webkit-radial-gradient(#fb7b7b, #fb0505);
         background: -moz-radial-gradient(#fb7b7b, #fb0505);
         background: -o-radial-gradient(#fb7b7b, #fb0505);
     }
 
-    div#minipowerButton2
+    #yellowLight
     {
         width: 20px;
         height: 20px;
@@ -197,13 +212,17 @@ body {
         -moz-border-radius: 20px;
         -o-border-radius: 20px;
 
+
+    }
+
+    .yellowLightOn {
         background: radial-gradient(#fbfb9b, #fbfb05);
         background: -webkit-radial-gradient(#fbfb9b, #fbfb05);
         background: -moz-radial-gradient(#fbfb9b, #fbfb05);
         background: -o-radial-gradient(#fbfb9b, #fbfb05);
     }
 
-    div#minipowerButton3
+    #greenLight
     {
         width: 20px;
         height: 20px;
@@ -220,11 +239,15 @@ body {
         -moz-border-radius: 20px;
         -o-border-radius: 20px;
 
+    }
+
+    .greenLightOn {
         background: radial-gradient(#b0fb7b, #50fb05);
         background: -webkit-radial-gradient(#b0fb7b, #50fb05);
         background: -moz-radial-gradient(#b0fb7b, #50fb05);
         background: -o-radial-gradient(#b0fb7b, #50fb05);
     }
+
 
     div#junction
     {
@@ -369,7 +392,11 @@ body {
         -o-border-radius: 30px;
     }
 
-    div#js--randomPokemon:hover
+    #js--randomPokemon:hover,
+    .js--pokeSprite:hover,
+    #js--searchButton:hover,
+    #js--helpButton:hover,
+    #powerButton:hover
     {
         cursor: pointer;
     }
@@ -823,7 +850,6 @@ body {
     {
         height: 45px;
         width : 45px;
-        background-color: #003300;
         float: left;
         margin-right: 7px;
 
@@ -832,15 +858,25 @@ body {
         -moz-border-radius: 10px;
         -o-border-radius: 10px;
 
-        background: linear-gradient(top, #307bfb 0%, #0530e5 80%);
-        background: -webkit-linear-gradient(top, #307bfb 0%, #0530e5 80%);
-        background: -moz-linear-gradient(top, #307bfb 0%, #0530e5 80%);
-        background: -o-linear-gradient(top, #307bfb 0%, #0530e5 80%);
 
         box-shadow: -1px 2px #001c91;
         -webkit-box-shadow: -1px 2px #001c91;
         -moz-box-shadow: -1px 2px #001c91;
         -o-box-shadow: -1px 2px #001c91;
+    }
+
+    .evolutionOn {
+        background: linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -webkit-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -moz-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -o-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+    }
+
+    .evolutionOff {
+        background: linear-gradient(top, #232525 0%, #072b46 80%);
+        background: -webkit-linear-gradient(top, #232525 0%, #072b46 80%);
+        background: -moz-linear-gradient(top, #232525 0%, #072b46 80%);
+        background: -o-linear-gradient(top, #232525 0%, #072b46 80%);
     }
 
     .js--pokeSprite
@@ -850,11 +886,6 @@ body {
         z-index: 10;
         margin: 2px 2px;
         visibility: hidden;
-    }
-
-    .js--pokeSprite:hover
-    {
-        cursor: pointer;
     }
 
     div#search
@@ -875,6 +906,11 @@ body {
         background-color: #30da0c;
         color: #003300;
         text-align: center;
+
+        box-shadow: 0 0 10px #003300 inset;
+        -webkit-box-shadow: 0 0 10px #003300 inset;
+        -moz-box-shadow: 0 0 10px #003300 inset;
+        -o-box-shadow: 0 0 10px #003300 inset;
     }
 
     div#barbutton3
@@ -983,10 +1019,7 @@ body {
         background: -o-radial-gradient(#0abd0a, #057b05);
     }
 
-    div#js--searchButton:hover
-    {
-        cursor: pointer;
-    }
+
 
     div#js--searchButton
     {

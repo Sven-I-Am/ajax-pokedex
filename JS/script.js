@@ -3,6 +3,7 @@
 /*------------------------------*/
 
 let input = document.getElementById('js--search');
+let powerOn = false;
 
 let Pokemon = function (id, name, types, moves, sprites, height, weight, flavor_text_entries)
 {
@@ -23,6 +24,19 @@ let Pokemon = function (id, name, types, moves, sprites, height, weight, flavor_
 /*GETTING FIELDS TO POPULATE*/
 /*--------------------------*/
 
+let pictureLeft = document.getElementById('picture');
+let powerButton = document.getElementById('powerButton');
+let redLight = document.getElementById('redLight');
+let yellowLight = document.getElementById('yellowLight');
+let greenLight = document.getElementById('greenLight');
+let statsScreen = document.getElementById('stats');
+let statsLeft = document.getElementById('stats-left');
+let statsRight = document.getElementById('stats-right');
+let flavorTextBox = document.getElementById('flavorText');
+let searchBox = document.getElementById('js--search');
+let evolutionBox = document.getElementsByClassName('evolution');
+console.log(evolutionBox);
+
 let dispPokeID = document.getElementById('js--pokeID');
 let dispPokeName = document.getElementById('js--pokeName');
 let dispPokeType = document.getElementById('js--pokeType');
@@ -32,25 +46,138 @@ let dispPokeMoves = document.getElementById('js--pokeMoves');
 let dispPokeImage = document.getElementById('js--pokeImage');
 let dispPokeFlavorText = document.getElementById('js--pokeFlavorText');
 let dispPokeSprite = document.getElementsByClassName('js--pokeSprite');
+let pokeSpriteTooltip = document.getElementsByClassName('js--pokeSpriteTooltip');
+
+/*------------------------*/
+/*POWER ON AND OFF POKEDEX*/
+/*------------------------*/
+//POKEDEX ALWAYS OFF ON LOAD
+
+clearPokedex();
+pictureLeft.style.backgroundColor = "#494949";
+dispPokeImage.style.visibility = "hidden";
+dispPokeID.style.visibility= "hidden";
+powerButton.classList.add('powerButtonOff');
+powerButton.classList.remove('powerButtonOn');
+redLight.classList.add('powerButtonOff');
+redLight.classList.remove('redLightOn');
+yellowLight.classList.add('powerButtonOff');
+yellowLight.classList.remove('yellowLightOn');
+greenLight.classList.add('powerButtonOff');
+greenLight.classList.remove('greenLightOn');
+statsScreen.style.background = '#003300';
+statsLeft.style.visibility = 'hidden';
+statsRight.style.visibility = 'hidden';
+flavorTextBox.style.visibility = 'hidden';
+searchBox.style.backgroundColor = '#003300';
+searchBox.setAttribute('placeholder', '');
+for(i=0;i<evolutionBox.length;i++){
+    evolutionBox[i].classList.add('evolutionOff');
+}
+
+
+
+document.getElementById('powerButton').addEventListener('click', function(){
+    if (powerOn === false) {
+        powerButton.classList.add('powerButtonOn');
+        powerButton.classList.remove('powerButtonOff');
+        setTimeout(()=>{
+            redLight.classList.add('redLightOn');
+            redLight.classList.remove('powerButtonOff');
+        },200)
+        setTimeout(()=>{
+            yellowLight.classList.add('yellowLightOn');
+            yellowLight.classList.remove('powerButtonOff');
+        },400)
+        setTimeout(()=>{
+            greenLight.classList.add('greenLightOn');
+            greenLight.classList.remove('powerButtonOff');
+        },600)
+        setTimeout(()=>{
+            pictureLeft.style.backgroundColor = "#fff";
+            dispPokeImage.style.visibility = "visible";
+            dispPokeImage.src = "IMG/oak.gif";
+            statsScreen.style.background = '#30da0c';
+            searchBox.style.backgroundColor = '#30da0c';
+            searchBox.setAttribute('placeholder', 'enter id or name');
+            powerOn = true;
+        }, 800)
+
+
+    } else {
+
+        setTimeout(()=>{
+            greenLight.classList.add('powerButtonOff');
+            greenLight.classList.remove('greenLightOn');
+        },200)
+        setTimeout(()=>{
+            yellowLight.classList.add('powerButtonOff');
+            yellowLight.classList.remove('yellowLightOn');
+        },400)
+        setTimeout(()=>{
+            redLight.classList.add('powerButtonOff');
+            redLight.classList.remove('redLightOn');
+        }, 600)
+        setTimeout(()=>{
+            clearPokedex();
+            pictureLeft.style.backgroundColor = "#494949";
+            dispPokeImage.style.visibility = "hidden";
+            dispPokeID.style.visibility= "hidden";
+            powerButton.classList.add('powerButtonOff');
+            powerButton.classList.remove('powerButtonOn');
+            statsScreen.style.background = '#003300';
+            statsLeft.style.visibility = 'hidden';
+            statsRight.style.visibility = 'hidden';
+            flavorTextBox.style.visibility = 'hidden';
+            searchBox.style.backgroundColor = '#003300';
+            searchBox.setAttribute('placeholder', '');
+            for(i=0;i<evolutionBox.length;i++){
+                evolutionBox[i].classList.add('evolutionOff');
+                evolutionBox[i].classList.remove('evolutionOn');
+            }
+            powerOn = false;
+        },800)
+
+    }
+})
+
+/*-------------------------*/
+/*HELP BUTTON*/
+/*------------------------*/
+
+document.getElementById('js--helpButton').addEventListener('click', function(){
+    alert('working on it');
+})
 
 /*-------------------------*/
 /*CALL API ON SEARCH CLICK*/
 /*------------------------*/
 
 document.getElementById("js--searchButton").addEventListener("click", function(){
-    for (i=0; i<dispPokeSprite.length;i++){
-        dispPokeSprite[i].src='';
-        dispPokeSprite[i].value='';
-        dispPokeSprite[i].style.visibility = "hidden";
-    }
-    (async () =>
-    {
-        try {
-            await fillPokedex(input.value);
-        } catch (error) {
-            //alert("Pokemon not found!");
+    if(powerOn===true){
+        clearPokedex();
+        let userInput = input.value.toString().toLowerCase();
+        if (userInput.endsWith("mime")){
+            userInput = 'mr-mime';
         }
-    })();
+        if (userInput.endsWith("rime")){
+            userInput = 'mr-rime';
+        }
+        if (userInput.startsWith("mime")){
+            userInput = 'mime-jr';
+        }
+        (async () =>
+        {
+            try {
+                await fillPokedex(userInput);
+            } catch (error) {
+                dispPokeImage.src="IMG/error.png";
+            }
+        })();
+    } else {
+        input.value = '';
+    }
+
 })
 
 /*------------------------------------*/
@@ -58,22 +185,38 @@ document.getElementById("js--searchButton").addEventListener("click", function()
 /*------------------------------------*/
 
 document.getElementById('js--randomPokemon').addEventListener('click', function(){
-    for (i=0; i<dispPokeSprite.length;i++){
-        dispPokeSprite[i].src='';
-        dispPokeSprite[i].value='';
-        dispPokeSprite[i].style.visibility = "hidden";
+    if (powerOn === true){
+        clearPokedex();
+        (async () =>
+        {
+            try {
+                let count = await getPokemonCount();
+                let randomID = Math.floor(Math.random() * count);
+                await fillPokedex(randomID);
+            } catch (error) {
+                dispPokeImage.src="IMG/error.png";
+            }
+        })();
+    } else {
+        input.value = '';
     }
+})
+
+/*------------------------------------------*/
+/*GO TO EVOLUTION WHEN THE SPRITE IS CLICKED*/
+/*------------------------------------------*/
+
+function goToEvo(evolution){
+    clearPokedex();
     (async () =>
     {
         try {
-            let count = await getPokemonCount();
-            let randomID = Math.floor(Math.random() * count);
-            await fillPokedex(randomID);
+            await fillPokedex(evolution);
         } catch (error) {
-            //alert("Pokemon not found!");
+            dispPokeImage.src="IMG/error.png";
         }
     })();
-})
+}
 
 
 /*----------*/
@@ -81,6 +224,8 @@ document.getElementById('js--randomPokemon').addEventListener('click', function(
 /*---------*/
 
 async function fillPokedex(userInput){
+    //clear searchbar
+    input.value='';
     let pokemon;
     pokemon = await getPokemon(userInput);
     let evoChainArray;
@@ -126,6 +271,11 @@ async function fillPokedex(userInput){
     })
     let flavorText= flavorTextEntriesEn[0].flavor_text;
 
+    dispPokeID.style.visibility= "visible";
+    statsLeft.style.visibility = 'visible';
+    statsRight.style.visibility = 'visible';
+    flavorTextBox.style.visibility = 'visible';
+
     dispPokeID.innerText = pokeID.toString();
     dispPokeName.innerText = pokeName;
     dispPokeType.innerText = pokeTypes;
@@ -134,13 +284,20 @@ async function fillPokedex(userInput){
     dispPokeMoves.innerHTML = pokeMoves;
     dispPokeImage.src = pokeImage;
     dispPokeFlavorText.innerHTML = flavorText.toString();
+
+
+
     let x = 0;
     evoChainArray.forEach(function(poke){
         dispPokeSprite[x].src = poke.sprite;
+        pokeSpriteTooltip[x].title = poke.name;
+        evolutionBox[x].classList.add('evolutionOn');
+        evolutionBox[x].classList.remove('evolutionOff');
+        dispPokeSprite[x].style.visibility = "visible";
         dispPokeSprite[x].addEventListener('click', function(){
             goToEvo(poke.name);
         });
-        dispPokeSprite[x].style.visibility = "visible";
+
         x++;
     })
 
@@ -219,30 +376,42 @@ async function getEvoChain(userInput){
             };
             evoChainArray.push(evo);
         }
+        //wittle down the evolution array to show only eevee + 5 random evolutions
+        do{
+            let x = Math.floor(Math.random() * evoChainArray.length)+1;
+            evoChainArray.splice(x,1);
+        } while (evoChainArray.length>6);
     }
 
     return evoChainArray;
 }
 
-function goToEvo(evolution){
-    for (i=0; i<dispPokeSprite.length;i++){
-        dispPokeSprite[i].src='';
-        dispPokeSprite[i].value='';
-        dispPokeSprite[i].style.visibility = "hidden";
-    }
-    (async () =>
-    {
-        try {
-            await fillPokedex(evolution);
-        } catch (error) {
-            alert("Pokemon not found!");
-        }
-    })();
-}
 
 async function getPokemonCount ()
 {
     let pokeData = await fetch("https://pokeapi.co/api/v2/pokemon/");
     pokeData = await pokeData.json();
     return pokeData.count;
+}
+
+function clearPokedex(){
+    for (i=0; i<dispPokeSprite.length;i++){
+        dispPokeSprite[i].src='';
+        dispPokeSprite[i].value='';
+        pokeSpriteTooltip[i].title = '';
+        dispPokeSprite[i].style.visibility = "hidden";
+        dispPokeID.style.visibility= "hidden";
+        dispPokeID.innerText = '';
+        dispPokeName.innerText = '';
+        dispPokeType.innerText = '';
+        dispPokeHeight.innerText = '';
+        dispPokeWeight.innerText = '';
+        dispPokeMoves.innerHTML = '';
+        dispPokeImage.src = 'IMG/loading.gif';
+        dispPokeFlavorText.innerHTML = '';
+        for(j=0;j<evolutionBox.length;j++){
+            evolutionBox[j].classList.add('evolutionOff');
+            evolutionBox[j].classList.remove('evolutionOn');
+        }
+    }
 }
