@@ -35,7 +35,6 @@ let statsRight = document.getElementById('stats-right');
 let flavorTextBox = document.getElementById('flavorText');
 let searchBox = document.getElementById('js--search');
 let evolutionBox = document.getElementsByClassName('evolution');
-console.log(evolutionBox);
 
 let dispPokeID = document.getElementById('js--pokeID');
 let dispPokeName = document.getElementById('js--pokeName');
@@ -230,7 +229,6 @@ async function fillPokedex(userInput){
     pokemon = await getPokemon(userInput);
     let evoChainArray;
     evoChainArray = await getEvoChain(userInput);
-
     let pokeID = pokemon.id;
     let pokeName = pokemon.name;
     let pokeTypes= [];
@@ -285,8 +283,6 @@ async function fillPokedex(userInput){
     dispPokeImage.src = pokeImage;
     dispPokeFlavorText.innerHTML = flavorText.toString();
 
-
-
     let x = 0;
     evoChainArray.forEach(function(poke){
         dispPokeSprite[x].src = poke.sprite;
@@ -294,10 +290,6 @@ async function fillPokedex(userInput){
         evolutionBox[x].classList.add('evolutionOn');
         evolutionBox[x].classList.remove('evolutionOff');
         dispPokeSprite[x].style.visibility = "visible";
-        dispPokeSprite[x].addEventListener('click', function(){
-            goToEvo(poke.name);
-        });
-
         x++;
     })
 
@@ -313,67 +305,76 @@ async function getPokemon (userInput)
 }
 
 async function getEvoChain(userInput){
+
     let pokeData = await fetch(`https://pokeapi.co/api/v2/pokemon/${userInput}/`);
     pokeData = await pokeData.json();
+    console.log(pokeData);
+
     let pokeSpecies = await fetch(pokeData.species.url);
     pokeSpecies= await pokeSpecies.json();
+    console.log(pokeSpecies);
+
     let evoChainURL = pokeSpecies.evolution_chain.url;
     let evoChain = await fetch(evoChainURL);
     evoChain = await evoChain.json();
+
     evoChain = evoChain.chain;
     let evoChainArray =[];
-    let evo1Name = evoChain.species.name;
-    let evo1Data = await fetch(`https://pokeapi.co/api/v2/pokemon/${evo1Name}/`);
-    evo1Data = await evo1Data.json();
-    let evo1Sprite = evo1Data.sprites.front_default;
-    let evo1 = {
-        name: evo1Name,
-        sprite: evo1Sprite
-    };
-    evoChainArray.push(evo1);
     if (evoChain.evolves_to.length === 1){
-
-        let chain = evoChain.evolves_to;
-        let chainData = chain[0];
-        let evo2Name = chainData.species.name;
-        let evo2Data = await fetch(`https://pokeapi.co/api/v2/pokemon/${evo2Name}/`);
-        evo2Data = await evo2Data.json();
-        let evo2Sprite = evo2Data.sprites.front_default;
-        let evo2 = {
-            name: evo2Name,
-            sprite: evo2Sprite
+        let evo1Name = evoChain.species.name;
+        let evo1Data = await fetch(`https://pokeapi.co/api/v2/pokemon/${evo1Name}/`);
+        evo1Data = await evo1Data.json();
+        let evo1Sprite = evo1Data.sprites.front_default;
+        let evo1 = {
+            name: evo1Name,
+            sprite: evo1Sprite
         };
-        evoChainArray.push(evo2);
-
-        if (chainData.evolves_to.length !== 0){
-
-            let chain2 = chainData.evolves_to;
-            let chain2Data = chain2[0];
-            let evo3Name = chain2Data.species.name;
-            let evo3Data = await fetch(`https://pokeapi.co/api/v2/pokemon/${evo3Name}/`);
-            evo3Data = await evo3Data.json();
-            let evo3Sprite = evo3Data.sprites.front_default;
-            let evo3 = {
-                name: evo3Name,
-                sprite: evo3Sprite
+        evoChainArray.push(evo1);
+        if (evoChain.evolves_to.length === 1){
+            let chain = evoChain.evolves_to;
+            let chainData = chain[0];
+            let evo2Name = chainData.species.name;
+            let evo2Data = await fetch(`https://pokeapi.co/api/v2/pokemon/${evo2Name}/`);
+            evo2Data = await evo2Data.json();
+            let evo2Sprite = evo2Data.sprites.front_default;
+            let evo2 = {
+                name: evo2Name,
+                sprite: evo2Sprite
             };
-            evoChainArray.push(evo3);
+            evoChainArray.push(evo2);
 
-        }
+            if (chainData.evolves_to.length !== 0){
+                let chain2 = chainData.evolves_to;
+                let chain2Data = chain2[0];
+                let evo3Name = chain2Data.species.name;
+                let evo3Data = await fetch(`https://pokeapi.co/api/v2/pokemon/${evo3Name}/`);
+                evo3Data = await evo3Data.json();
+                let evo3Sprite = evo3Data.sprites.front_default;
+                let evo3 = {
+                    name: evo3Name,
+                    sprite: evo3Sprite
+                };
+                evoChainArray.push(evo3);
+            }
 //POKEMON WITH MULTIPLE EVOLUTIONS//
-    } else {
+        }
 
+    }else {
         let chain = evoChain.evolves_to;
+        console.log(chain);
         for(i=0;i<chain.length;i++){
             let evoMultiData = chain[i].species;
             let evoName = evoMultiData.name;
-            let evoData = await fetch(`https://pokeapi.co/api/v2/pokemon/${evoName}/`);
-            evoData = await evoData.json();
-            let evoSprite = evoData.sprites.front_default;
+            console.log(evoName);
+            console.log(pokeData.name);
+            //let evoData = await fetch(`https://pokeapi.co/api/v2/pokemon/${evoName}/`);
+           // evoData = await evoData.json();
+            //let evoSprite = evoData.sprites.front_default;
             let evo = {
                 name: evoName,
-                sprite: evoSprite
+                //sprite: evoSprite
             };
+            console.log(evo);
             evoChainArray.push(evo);
         }
         //wittle down the evolution array to show only eevee + 5 random evolutions
@@ -382,7 +383,6 @@ async function getEvoChain(userInput){
             evoChainArray.splice(x,1);
         } while (evoChainArray.length>6);
     }
-
     return evoChainArray;
 }
 
@@ -400,18 +400,19 @@ function clearPokedex(){
         dispPokeSprite[i].value='';
         pokeSpriteTooltip[i].title = '';
         dispPokeSprite[i].style.visibility = "hidden";
-        dispPokeID.style.visibility= "hidden";
-        dispPokeID.innerText = '';
-        dispPokeName.innerText = '';
-        dispPokeType.innerText = '';
-        dispPokeHeight.innerText = '';
-        dispPokeWeight.innerText = '';
-        dispPokeMoves.innerHTML = '';
-        dispPokeImage.src = 'IMG/loading.gif';
-        dispPokeFlavorText.innerHTML = '';
-        for(j=0;j<evolutionBox.length;j++){
-            evolutionBox[j].classList.add('evolutionOff');
-            evolutionBox[j].classList.remove('evolutionOn');
-        }
+
+    }
+    dispPokeID.style.visibility= "hidden";
+    dispPokeID.innerText = '';
+    dispPokeName.innerText = '';
+    dispPokeType.innerText = '';
+    dispPokeHeight.innerText = '';
+    dispPokeWeight.innerText = '';
+    dispPokeMoves.innerHTML = '';
+    dispPokeImage.src = 'IMG/loading.gif';
+    dispPokeFlavorText.innerHTML = '';
+    for(j=0;j<evolutionBox.length;j++){
+        evolutionBox[j].classList.add('evolutionOff');
+        evolutionBox[j].classList.remove('evolutionOn');
     }
 }
