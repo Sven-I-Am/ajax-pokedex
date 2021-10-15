@@ -4,6 +4,8 @@
 
 let input = document.getElementById('js--search');
 let powerOn = false;
+let play = true;
+let music = document.getElementById('music');
 
 let Pokemon = function (id, name, types, moves, sprites, height, weight, flavor_text_entries)
 {
@@ -31,6 +33,7 @@ let randomButton = document.querySelector('.randomPokemon');
 let barButton1 = document.querySelector('.barbutton1');
 let barButton2 = document.querySelector('.barbutton2');
 let logo = document.querySelector('.logo');
+let muteButton = document   .getElementById('play');
 
 let pictureLeft = document.getElementById('picture');
 let powerButton = document.getElementById('powerButton');
@@ -102,6 +105,8 @@ for(i=0;i<evolutionBox.length;i++){
 
 document.getElementById('powerButton').addEventListener('click', function(){
     if (powerOn === false) {
+        play = false;
+        playMusic();
         powerButton.classList.add('powerButtonOn');
         powerButton.classList.remove('powerButtonOff');
         right.classList.add('right');
@@ -142,7 +147,8 @@ document.getElementById('powerButton').addEventListener('click', function(){
 
 
     } else {
-
+        play = true;
+        playMusic();
         setTimeout(()=>{
             greenLight.classList.add('powerButtonOff');
             greenLight.classList.remove('greenLightOn');
@@ -175,6 +181,19 @@ document.getElementById('powerButton').addEventListener('click', function(){
             powerOn = false;
         },800)
 
+    }
+})
+
+/*-----------*/
+/*MUTE BUTTON*/
+/*-----------*/
+
+muteButton.addEventListener('click', function(){
+    playMusic();
+    if (play===false){
+        document.getElementById('playbutton').src="IMG/musicOn.png";
+    } else {
+        document.getElementById('playbutton').src="IMG/musicOff.png"
     }
 })
 
@@ -496,5 +515,18 @@ function clearPokedex(){
     for(j=0;j<evolutionBox.length;j++){
         evolutionBox[j].classList.add('evolutionOff');
         evolutionBox[j].classList.remove('evolutionOn');
+    }
+}
+
+/*----------*/
+/*PLAY MUSIC*/
+/*----------*/
+function playMusic (){
+    if (play === false){
+        music.play();
+        play = true;
+    } else {
+        music.pause();
+        play = false;
     }
 }

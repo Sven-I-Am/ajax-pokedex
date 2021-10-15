@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--metadata-->
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A pokedex using javascript and the pokemon api">
+    <meta name="keywords" content="pokemon, pokedex, api, javascript, BeCode">
+    <meta name="author" content="Sven Vander Mierde">
+
+    <!--favicon-->
+    <link rel="icon" type="image/png" sizes="32x32" href="IMG/pikachuIcon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="IMG/pikachuIcon.png">
+
+    <!--font and stylesheet-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
+
+    <title>Pokedex</title>
 </head>
 <body>
-
+<audio id="music">
+    <source src="AUDIO/03%20Title%20Screen.mp3" type="audio/mpeg">
+</audio>
 <div class="pokedex">
     <div class="left">
         <div class="logo"></div>
@@ -48,7 +62,10 @@
             </div>
         </div>
         <div id="js--randomPokemon" class="randomPokemon"></div>
-        <div class="barbutton1"></div>
+        <div class="barbutton1" id="play">
+            <img id="playbutton" src="IMG/musicOff.png" alt="playMusic">
+        </div>
+
         <div class="barbutton2"></div>
         <div class="cross">
             <div id="leftcross">
