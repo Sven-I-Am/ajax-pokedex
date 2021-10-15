@@ -139,6 +139,7 @@ document.getElementById('powerButton').addEventListener('click', function(){
             pictureLeft.style.backgroundColor = "#fff";
             dispPokeImage.style.visibility = "visible";
             dispPokeImage.src = "IMG/oak.gif";
+            powerOnVoice();
             statsScreen.style.background = '#30da0c';
             searchBox.style.backgroundColor = '#30da0c';
             searchBox.setAttribute('placeholder', 'enter id or name');
@@ -371,7 +372,11 @@ async function fillPokedex(userInput){
     dispPokeWeight.innerText = pokeWeight.toString() + ' lbs';
     dispPokeMoves.innerHTML = pokeMoves;
     dispPokeImage.src = pokeImage;
-    dispPokeFlavorText.innerHTML = flavorText.toString();
+    dispPokeFlavorText.innerHTML = "<marquee>" + flavorText.toString() + "</marquee>";
+
+    setTimeout(()=>{
+        textToAudio();
+    },500)
 
     let x = 0;
     evoChainArray.forEach(function(poke){
@@ -538,9 +543,58 @@ function clearPokedex(){
 function playMusic (){
     if (play === false){
         music.play();
+        music.loop = true;
+        music.volume = 0.1;
         play = true;
     } else {
         music.pause();
         play = false;
     }
+}
+
+
+/*----------------------------*/
+/*TRYING TO ADD TEXT TO SPEECH*/
+/*----------------------------*/
+let voices = []; // global array
+let UK;
+
+window.speechSynthesis.onvoiceschanged = () => {
+    // Get List of Voices
+    voices = window.speechSynthesis.getVoices();
+    console.log(voices);
+
+    for (i=0;i<voices.length;i++){
+        if(voices[i].voiceURI==='Google UK English Male'){
+            UK=voices[i];
+        }
+    }
+};
+
+function textToAudio() {
+    let msg = dispPokeFlavorText.innerText;
+
+    let speech = new SpeechSynthesisUtterance();
+    speech.lang = "en-US";
+
+    speech.text = msg;
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
+    speech.voice = UK;
+
+    window.speechSynthesis.speak(speech);
+}
+
+function powerOnVoice() {
+    let msg = "welcome to the world of pokemon";
+    let speech = new SpeechSynthesisUtterance();
+
+    speech.lang = "en-US";
+    speech.text = msg;
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
+    speech.voice = UK;
+    window.speechSynthesis.speak(speech);
 }
