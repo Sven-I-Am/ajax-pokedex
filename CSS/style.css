@@ -1,3 +1,7 @@
+/*------*/
+/*SETUP*/
+/*-----*/
+
 * {
     margin: 0;
     padding: 0;
@@ -12,18 +16,16 @@ body {
     background-attachment: fixed;
 }
 
+/*------------------------------------*/
+/*POKEDEX OVERALL SIZE AND POSITIONING*/
+/*------------------------------------*/
 
-
-@media all {
-
-    div#pokedex
-    {
+    .pokedex {
         width: 750px;
         margin: 50px auto 0 auto;
     }
 
-    div#left
-    {
+    .left {
         width: 400px;
         height: 500px;
         float: left;
@@ -31,20 +33,18 @@ body {
         z-index: 1;
     }
 
-    div#right
-    {
+    .right {
         width: 350px;
         height: 500px;
         float: left;
         position: relative;
     }
 
+/*---------*/
+/*LEFT FLAP*/
+/*---------*/
 
-
-    /* //// LEFT PART //// */
-
-    div#curve1_left
-    {
+    .curve1_left {
         width: 201px;
         height: 85px;
         background-color: #8b0000;
@@ -72,8 +72,7 @@ body {
     }
 
 
-    div#bg_curve1_left
-    {
+    .bg_curve1_left {
         width: 400px;
         height: 80px;
         background-color: #8b0000;
@@ -84,8 +83,7 @@ body {
         -o-border-top-left-radius: 30px;
     }
 
-    div#curve2_left
-    {
+    #curve2_left {
         width: 216px;
         height: 451px;
         background-color: #c00d0d;
@@ -101,8 +99,7 @@ body {
         -o-border-top-left-radius: 85px 60px;
     }
 
-    div#bg_curve2_left
-    {
+    #bg_curve2_left {
         width: 400px;
         height: 420px;
         background-color: #c00d0d;
@@ -118,8 +115,11 @@ body {
         -o-border-bottom-left-radius: 30px;
     }
 
-    div#powerButton
-    {
+/*---------------------*/
+/*ELEMENTS ON LEFT FLAP*/
+/*---------------------*/
+
+    #powerButton {
         width: 60px;
         height: 60px;
         margin-right: 15px;
@@ -130,8 +130,6 @@ body {
         -webkit-box-shadow: 0 0 10px #490000;
         -moz-box-shadow: 0 0 10px #490000;
         -o-box-shadow: 0 0 10px #490000;
-
-
 
         border-radius: 35px;
         -webkit-border-radius: 35px;
@@ -153,8 +151,7 @@ body {
         background: -o-radial-gradient(#232525, #072b46);
     }
 
-    div#reflect
-    {
+    #reflect {
         width: 30px;
         height: 18px;
         margin: 3px 0 0 15px;
@@ -165,11 +162,9 @@ body {
         -webkit-border-radius: 15px 9px;
         -moz-border-radius: 15px 9px;
         -o-border-radius: 15px 9px;
-
     }
 
-    div#redLight
-    {
+    #redLight {
         width: 20px;
         height: 20px;
         margin-right: 10px;
@@ -184,8 +179,6 @@ body {
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;
         -o-border-radius: 20px;
-
-
     }
 
     .redLightOn {
@@ -195,8 +188,7 @@ body {
         background: -o-radial-gradient(#fb7b7b, #fb0505);
     }
 
-    #yellowLight
-    {
+    #yellowLight {
         width: 20px;
         height: 20px;
         margin-right: 10px;
@@ -211,8 +203,6 @@ body {
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;
         -o-border-radius: 20px;
-
-
     }
 
     .yellowLightOn {
@@ -222,8 +212,7 @@ body {
         background: -o-radial-gradient(#fbfb9b, #fbfb05);
     }
 
-    #greenLight
-    {
+    #greenLight {
         width: 20px;
         height: 20px;
         margin-right: 10px;
@@ -238,7 +227,6 @@ body {
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;
         -o-border-radius: 20px;
-
     }
 
     .greenLightOn {
@@ -248,9 +236,7 @@ body {
         background: -o-radial-gradient(#b0fb7b, #50fb05);
     }
 
-
-    div#junction
-    {
+    #junction {
         width: 60px;
         height: 451px;
         float: right;
@@ -261,8 +247,7 @@ body {
         background: -o-linear-gradient(left, #8b0000 0%, #c00d0d 50%, #8b0000 100%);
     }
 
-    div#junction1
-    {
+    #junction1 {
         height: 40px;
         background-color: #5e0000;
         opacity: 0.3;
@@ -273,8 +258,7 @@ body {
         border-bottom: 2px solid #330000;
     }
 
-    div#junction2
-    {
+    #junction2 {
         height: 40px;
         background-color: #5e0000;
         opacity: 0.3;
@@ -283,8 +267,7 @@ body {
         border-bottom: 2px solid #330000;
     }
 
-    div#screen
-    {
+    .screen {
         height: 245px;
         width: 260px;
         padding: 0 20px;
@@ -301,8 +284,7 @@ body {
         -o-border-radius: 15px;
     }
 
-    div#screen:after
-    {
+    .screen:after {
         content: "";
         border-top: 40px solid #b0b0b0;
         border-left: 40px solid #c00d0d;
@@ -313,8 +295,7 @@ body {
         left: 0;
     }
 
-    div#picture
-    {
+    #picture {
         height: 175px;
         width: 254px;
         margin-top: 20px;
@@ -329,20 +310,17 @@ body {
         -o-border-radius: 15px;
     }
 
-    div#picture img
-    {
+    #picture img {
         display: block;
         margin: 0 auto;
     }
 
-    div#topPicture
-    {
+    #topPicture {
         margin: 6px auto;
         width: 40px;
     }
 
-    div#buttontopPicture1, div#buttontopPicture2
-    {
+    #buttontopPicture1, #buttontopPicture2 {
         height: 8px;
         width: 8px;
         background-color: #c00d0d;
@@ -355,13 +333,11 @@ body {
         -o-border-radius: 15px;
     }
 
-    div#buttontopPicture1
-    {
+    #buttontopPicture1 {
         margin-right: 20px;
     }
 
-    div#js--pokeID
-    {
+    #js--pokeID {
         height: 26px;
         width:fit-content;
         background-color: #30da0c;
@@ -372,16 +348,14 @@ body {
         font-size: 22px;
     }
 
-    div#speakers
-    {
+    #speakers {
         float: right;
         width: 75px;
         height: 25px;
         margin-right: 20px;
     }
 
-    div.sp
-    {
+    .sp {
         height: 3px;
         margin-bottom: 5px;
         background-color: #494949;
@@ -392,17 +366,15 @@ body {
         -o-border-radius: 30px;
     }
 
-    #js--randomPokemon:hover,
+    .randomPokemon:hover,
     .js--pokeSprite:hover,
     #js--searchButton:hover,
     #js--helpButton:hover,
-    #powerButton:hover
-    {
+    #powerButton:hover {
         cursor: pointer;
     }
 
-    div#js--randomPokemon
-    {
+    .randomPokemon {
         height: 50px;
         width: 50px;
         background-color: #000;
@@ -427,8 +399,7 @@ body {
         -o-box-shadow: -3px 2px #001c91;
     }
 
-    div#barbutton1
-    {
+    .barbutton1 {
         height: 13px;
         width: 50px;
 
@@ -452,8 +423,7 @@ body {
         -o-box-shadow: -1px 2px #004200;
     }
 
-    div#barbutton2
-    {
+    .barbutton2 {
         height: 13px;
         width: 50px;
 
@@ -477,8 +447,7 @@ body {
         -o-box-shadow: -1px 2px #7b0000;
     }
 
-    div#cross
-    {
+    .cross {
         width: 90px;
         height: 90px;
 
@@ -487,8 +456,7 @@ body {
         left: 230px;
     }
 
-    div#topcross
-    {
+    #topcross {
         width: 30px;
         height: 30px;
         background-color: #222;
@@ -513,8 +481,7 @@ body {
         -o-border-top-right-radius: 5px;
     }
 
-    div#leftcross
-    {
+    #leftcross {
         width: 30px;
         height: 30px;
         background-color: #222;
@@ -540,8 +507,7 @@ body {
         -o-border-bottom-left-radius: 5px;
     }
 
-    div#midcross
-    {
+    #midcross {
         width: 30px;
         height: 30px;
         background-color: #222;
@@ -556,8 +522,7 @@ body {
         -o-box-shadow: -3px 2px #010101;
     }
 
-    div#rightcross
-    {
+    #rightcross {
         width: 30px;
         height: 30px;
         background-color: #222;
@@ -582,8 +547,7 @@ body {
         -o-border-bottom-right-radius: 5px;
     }
 
-    div#botcross
-    {
+    #botcross {
         width: 30px;
         height: 30px;
         background-color: #222;
@@ -608,8 +572,7 @@ body {
         -o-border-bottom-right-radius: 5px;
     }
 
-    div#upT
-    {
+    #upT {
         width: 0;
         height: 0;
         border-left: 10px solid transparent;
@@ -621,8 +584,7 @@ body {
         left: 4px;
     }
 
-    div#downT
-    {
+    #downT {
         width: 0;
         height: 0;
         border-left: 10px solid transparent;
@@ -634,8 +596,7 @@ body {
         left: 4px;
     }
 
-    div#leftT
-    {
+    #leftT {
         width: 0;
         height: 0;
         border-top: 10px solid transparent;
@@ -647,8 +608,7 @@ body {
         left: 4px;
     }
 
-    div#rightT
-    {
+    #rightT {
         width: 0;
         height: 0;
         border-top: 10px solid transparent;
@@ -660,8 +620,7 @@ body {
         right: 5px;
     }
 
-    div#midCircle
-    {
+    #midCircle {
         width: 20px;
         height: 20px;
 
@@ -680,12 +639,11 @@ body {
         background: -o-radial-gradient(#111, #222);
     }
 
+/*----------*/
+/*RIGHT FLAP*/
+/*----------*/
 
-
-    /* //// RIGHT PART //// */
-
-    div#curve1_right
-    {
+    #curve1_right {
         width: 166px;
         height: 451px;
         background-color: #c00d0d;
@@ -701,9 +659,7 @@ body {
         -o-border-right-left-radius: 85px 60px;
     }
 
-
-    div#bg_curve1_right
-    {
+    #bg_curve1_right {
         width: 350px;
         height: 80px;
         background-color: transparent;
@@ -714,8 +670,7 @@ body {
         -o-border-top-right-radius: 30px;
     }
 
-    div#curve2_right
-    {
+    #curve2_right {
         width: 216px;
         height: 100px;
         background-color: transparent;
@@ -731,8 +686,7 @@ body {
         -o-border-bottom-left-radius: 85px 60px;
     }
 
-    div#bg_curve2_right
-    {
+    #bg_curve2_right {
         width: 350px;
         height: 400px;
         background-color: #c00d0d;
@@ -757,8 +711,11 @@ body {
         -o-box-shadow: -10px 9px #5e0000;
     }
 
-    div#stats
-    {
+/*----------------------*/
+/*ELEMENTS ON RIGHT FLAP*/
+/*----------------------*/
+
+    #stats {
         height: 130px;
         width: 280px;
         padding: 10px;
@@ -782,41 +739,33 @@ body {
         -o-box-shadow: 0 0 20px #003300 inset;
     }
 
-    #base-stats
-    {
+    #base-stats {
         width: 100%;
         height: 70%;
     }
 
-    #stats-left
-    {
+    #stats-left {
         width: 50%;
         float: left;
         margin-left: 0;
     }
 
-    #stats-right
-    {
+    #stats-right {
         width: 50%;
         float: right;
         margin-left: 0;
         text-align: right;
     }
 
-
-
-    #stats-right p
-    {
+    #stats-right p {
         float: left;
     }
 
-    #stats-right span
-    {
+    #stats-right span {
         float: right;
     }
 
-    #flavorText:before
-    {
+    #flavorText:before {
         display: block;
         height: 2px;
         background-color: #003300;
@@ -825,7 +774,6 @@ body {
         margin: 0 auto 10px;
     }
 
-
     #flavorText
     {
         width: 100%;
@@ -833,21 +781,14 @@ body {
         overflow-style: marquee-line;
     }
 
-
-
-
-
-    div#evolutions
-    {
+    #evolutions {
         z-index: 1;
-
         position: absolute;
         top: 295px;
         left: 25px;
     }
 
-    div.evolution
-    {
+    .evolution {
         height: 45px;
         width : 45px;
         float: left;
@@ -857,7 +798,6 @@ body {
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         -o-border-radius: 10px;
-
 
         box-shadow: -1px 2px #001c91;
         -webkit-box-shadow: -1px 2px #001c91;
@@ -879,8 +819,7 @@ body {
         background: -o-linear-gradient(top, #232525 0%, #072b46 80%);
     }
 
-    .js--pokeSprite
-    {
+    .js--pokeSprite {
         width: 41px;
         height: 41px;
         z-index: 10;
@@ -888,17 +827,14 @@ body {
         visibility: hidden;
     }
 
-    div#search
-    {
+    #search {
         z-index: 1;
-
         position: absolute;
         top: 350px;
         left: 40px;
     }
 
-    #js--search
-    {
+    #js--search {
         width: 270px;
         height: 25px;
         font-size: 22px;
@@ -913,8 +849,7 @@ body {
         -o-box-shadow: 0 0 10px #003300 inset;
     }
 
-    div#barbutton3
-    {
+    #barbutton3 {
         height: 13px;
         width: 50px;
         z-index: 1;
@@ -939,8 +874,7 @@ body {
         -o-box-shadow: -1px 2px #004200;
     }
 
-    div#barbutton4
-    {
+    #barbutton4 {
         height: 13px;
         width: 50px;
         z-index: 1;
@@ -965,8 +899,7 @@ body {
         -o-box-shadow: -1px 2px #7b0000;
     }
 
-    div#minipowerButton4
-    {
+    #minipowerButton4 {
         width: 15px;
         height: 15px;
         float: left;
@@ -992,8 +925,7 @@ body {
         background: -o-radial-gradient(#ff9b5b, #fb6505);
     }
 
-    div#minipowerButton5
-    {
+    #minipowerButton5 {
         width: 15px;
         height: 15px;
         float: left;
@@ -1021,8 +953,7 @@ body {
 
 
 
-    div#js--searchButton
-    {
+    #js--searchButton {
         width: 140px;
         height: 70px;
         z-index: 1;
@@ -1043,8 +974,7 @@ body {
         -o-box-shadow: 0 0 20px #ff6600 inset;
     }
 
-    div#js--helpButton
-    {
+    #js--helpButton {
         width: 140px;
         height: 70px;
         z-index: 1;
@@ -1065,8 +995,7 @@ body {
         -o-box-shadow: 0 0 20px #ff6600 inset;
     }
 
-    .button-image
-    {
+    .button-image {
         width: 50px;
         height: auto;
         position: absolute;
@@ -1074,18 +1003,18 @@ body {
         left: 45px;
         z-index: 5;
     }
-}
+
 
 
 
 @media handheld and (orientation:portrait), (max-width:768px) {
 
-    div#pokedex
+    .pokedex
     {
         width: 400px;
     }
 
-    div#logo
+    .logo
     {
         width: 281px;
         height: 99px;
@@ -1097,7 +1026,7 @@ body {
         left: 30px;
     }
 
-    div#left
+    .left
     {
         width: 400px;
         height: 500px;
@@ -1107,7 +1036,7 @@ body {
         margin: 0 auto;
     }
 
-    div#curve1_left
+    .curve1_left
     {
         width: 201px;
         height: 85px;
@@ -1135,7 +1064,7 @@ body {
         -o-border-top-left-radius: 30px;
     }
 
-    div#bg_curve1_left
+    .bg_curve1_left
     {
         width: 400px;
         height: 80px;
@@ -1152,9 +1081,92 @@ body {
         -o-border-top-left-radius: 30px;
     }
 
-    div#right, div#screen, div#js--randomPokemon, div#barbutton1, div#barbutton2, div#cross
+    .right, .screen, .randomPokemon, .barbutton1, .barbutton2, .cross
     {
         display: none;
     }
 
+}
+
+
+
+/*----------*/
+/*POWER OFF*/
+/*---------*/
+
+.pokedexOff
+{
+    width: 400px;
+}
+
+.logoOff
+{
+    width: 281px;
+    height: 99px;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/200653/logo.png') no-repeat left top;
+    z-index: 1;
+
+    position: absolute;
+    top: 220px;
+    left: 30px;
+}
+
+.leftOff
+{
+    width: 400px;
+    height: 500px;
+    float: left;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+}
+
+.curve1_leftOff
+{
+    width: 201px;
+    height: 85px;
+    background-color: #8b0000;
+    float: left;
+    padding: 15px 0 0 15px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    box-shadow: 0 0 #5e0000;
+    -webkit-box-shadow: 0 0 #5e0000;
+    -moz-box-shadow: 0 0 #5e0000;
+    -o-box-shadow: 0 0 #5e0000;
+
+    border-bottom-right-radius: 85px 60px;
+    -webkit-border-bottom-right-radius: 85px 60px;
+    -moz-border-bottom-right-radius: 85px 60px;
+    -o-border-bottom-right-radius: 85px 60px;
+
+    border-top-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+}
+
+.bg_curve1_leftOff
+{
+    width: 400px;
+    height: 80px;
+    background-color: #8b0000;
+
+    box-shadow: -10px 9px #5e0000;
+    -webkit-box-shadow: -10px 9px #5e0000;
+    -moz-box-shadow: -10px 9px #5e0000;
+    -o-box-shadow: -10px 9px #5e0000;
+
+    border-top-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+}
+
+.rightOff, .screenOff, .randomPokemonOff, .barbutton1Off, .barbutton2Off, .crossOff
+{
+    display: none;
 }

@@ -24,6 +24,14 @@ let Pokemon = function (id, name, types, moves, sprites, height, weight, flavor_
 /*GETTING FIELDS TO POPULATE*/
 /*--------------------------*/
 
+let right = document.querySelector('.right');
+let screen = document.querySelector('.screen');
+let cross = document.querySelector('.cross');
+let randomButton = document.querySelector('.randomPokemon');
+let barButton1 = document.querySelector('.barbutton1');
+let barButton2 = document.querySelector('.barbutton2');
+let logo = document.querySelector('.logo');
+
 let pictureLeft = document.getElementById('picture');
 let powerButton = document.getElementById('powerButton');
 let redLight = document.getElementById('redLight');
@@ -53,6 +61,22 @@ let pokeSpriteTooltip = document.getElementsByClassName('js--pokeSpriteTooltip')
 //POKEDEX ALWAYS OFF ON LOAD
 
 clearPokedex();
+right.classList.add('rightOff');
+right.classList.remove('right');
+screen.classList.add('screenOff');
+screen.classList.remove('screen');
+cross.classList.add('crossOff');
+cross.classList.remove('cross');
+randomButton.classList.add('randomPokemonOff');
+randomButton.classList.remove('randomPokemon');
+barButton1.classList.add('barbutton1Off');
+barButton1.classList.remove('barbutton1');
+barButton2.classList.add('barbutton2Off');
+barButton2.classList.remove('barbutton2');
+logo.classList.add('logoOff');
+logo.classList.remove('logo');
+
+
 pictureLeft.style.backgroundColor = "#494949";
 dispPokeImage.style.visibility = "hidden";
 dispPokeID.style.visibility= "hidden";
@@ -80,6 +104,20 @@ document.getElementById('powerButton').addEventListener('click', function(){
     if (powerOn === false) {
         powerButton.classList.add('powerButtonOn');
         powerButton.classList.remove('powerButtonOff');
+        right.classList.add('right');
+        right.classList.remove('rightOff');
+        screen.classList.add('screen');
+        screen.classList.remove('screenOff');
+        cross.classList.add('cross');
+        cross.classList.remove('crossOff');
+        randomButton.classList.add('randomPokemon');
+        randomButton.classList.remove('randomPokemonOff');
+        barButton1.classList.add('barbutton1');
+        barButton1.classList.remove('barbutton1Off');
+        barButton2.classList.add('barbutton2');
+        barButton2.classList.remove('barbutton2Off');
+        logo.classList.add('logo');
+        logo.classList.remove('logoOff');
         setTimeout(()=>{
             redLight.classList.add('redLightOn');
             redLight.classList.remove('powerButtonOff');
@@ -188,13 +226,32 @@ document.getElementById('js--randomPokemon').addEventListener('click', function(
         clearPokedex();
         (async () =>
         {
-            try {
-                let count = await getPokemonCount();
-                let randomID = Math.floor(Math.random() * count);
-                await fillPokedex(randomID);
-            } catch (error) {
-                dispPokeImage.src="IMG/error.png";
-            }
+            let err;
+            do {
+                err = false;
+                try {
+                    //official count from pokemon api
+                    let count = await getPokemonCount();
+                    //random number within the count
+                    let rand1 = Math.floor(Math.random() * count);
+                    //pokemon ID's for special forms between 10001 and 10209
+                    //random number between those values- still trying to find a way to avoid hard coding those numbers in
+                    let rand2 = Math.floor(Math.random() * 209) + 1;
+                    //pick either of the randoms by rng of 0 or 1
+                    let rand = Math.floor(Math.random()*2);
+                    let randomID;
+                    if(rand===0){
+                        randomID = rand1;
+                    } else {
+                        randomID = rand2 + 10000;
+                    }
+                    await fillPokedex(randomID);
+                } catch (error) {
+                    dispPokeImage.src="IMG/loading.gif";
+                    err = true;
+                }
+            } while (err === true)
+
         })();
     } else {
         input.value = '';
@@ -308,11 +365,9 @@ async function getEvoChain(userInput){
 
     let pokeData = await fetch(`https://pokeapi.co/api/v2/pokemon/${userInput}/`);
     pokeData = await pokeData.json();
-    console.log(pokeData);
 
     let pokeSpecies = await fetch(pokeData.species.url);
     pokeSpecies= await pokeSpecies.json();
-    console.log(pokeSpecies);
 
     let evoChainURL = pokeSpecies.evolution_chain.url;
     let evoChain = await fetch(evoChainURL);
@@ -361,23 +416,50 @@ async function getEvoChain(userInput){
 
     }else {
         let chain = evoChain.evolves_to;
-        console.log(chain);
+        let evo1Name = evoChain.species.name;
+        let evo1Data = await fetch(`https://pokeapi.co/api/v2/pokemon/${evo1Name}/`);
+        evo1Data = await evo1Data.json();
+        let evo1Sprite = evo1Data.sprites.front_default;
+        let evo1 = {
+            name: evo1Name,
+            sprite: evo1Sprite
+        };
+        evoChainArray.push(evo1);
         for(i=0;i<chain.length;i++){
             let evoMultiData = chain[i].species;
             let evoName = evoMultiData.name;
-            console.log(evoName);
-            console.log(pokeData.name);
-            //let evoData = await fetch(`https://pokeapi.co/api/v2/pokemon/${evoName}/`);
-           // evoData = await evoData.json();
-            //let evoSprite = evoData.sprites.front_default;
-            let evo = {
-                name: evoName,
-                //sprite: evoSprite
-            };
-            console.log(evo);
-            evoChainArray.push(evo);
+            let exception = pokeData.name;
+            let evoSprite;
+            let evo;
+            try {
+                let evoData = await fetch(`https://pokeapi.co/api/v2/pokemon/${evoName}/`);
+                evoData = await evoData.json();
+                evoSprite = evoData.sprites.front_default;
+                evo = {
+                    name: evoName,
+                    sprite: evoSprite
+                };
+                evoChainArray.push(evo);
+            } catch (error) {
+                let exceptionData = await fetch(`https://pokeapi.co/api/v2/pokemon/${exception}/`)
+                exceptionData= await exceptionData.json();
+                evoSprite = exceptionData.sprites.front_default;
+                evo = {
+                    name: evoName,
+                    sprite: evoSprite
+                };
+                evoChainArray.push(evo);
+            }
+
+
+
         }
         //wittle down the evolution array to show only eevee + 5 random evolutions
+        for (i=0;i<evoChainArray.length;i++){
+            if (evoChainArray[i].name === pokeData.name){
+                evoChainArray.splice(i,1);
+            }
+        }
         do{
             let x = Math.floor(Math.random() * evoChainArray.length)+1;
             evoChainArray.splice(x,1);
