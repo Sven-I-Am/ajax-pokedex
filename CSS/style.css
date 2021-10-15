@@ -399,6 +399,14 @@ body {
         -o-box-shadow: -3px 2px #001c91;
     }
 
+    #random {
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        top:5px;
+        left: 4px;
+    }
+
     .barbutton1 {
         height: 13px;
         width: 50px;
@@ -787,6 +795,7 @@ body {
         width: 100%;
         float: left;
         overflow-style: marquee-line;
+
     }
 
     #evolutions {
