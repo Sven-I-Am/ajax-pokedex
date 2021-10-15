@@ -372,7 +372,7 @@ async function fillPokedex(userInput){
     dispPokeWeight.innerText = pokeWeight.toString() + ' lbs';
     dispPokeMoves.innerHTML = pokeMoves;
     dispPokeImage.src = pokeImage;
-    dispPokeFlavorText.innerHTML = "<marquee>" + flavorText.toString() + "</marquee>";
+    dispPokeFlavorText.innerHTML = "<marquee>" + flavorText.toString().toLowerCase() + "</marquee>";
 
     setTimeout(()=>{
         textToAudio();
