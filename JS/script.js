@@ -178,6 +178,20 @@ document.getElementById('powerButton').addEventListener('click', function(){
                 evolutionBox[i].classList.add('evolutionOff');
                 evolutionBox[i].classList.remove('evolutionOn');
             }
+            right.classList.add('rightOff');
+            right.classList.remove('right');
+            screen.classList.add('screenOff');
+            screen.classList.remove('screen');
+            cross.classList.add('crossOff');
+            cross.classList.remove('cross');
+            randomButton.classList.add('randomPokemonOff');
+            randomButton.classList.remove('randomPokemon');
+            barButton1.classList.add('barbutton1Off');
+            barButton1.classList.remove('barbutton1');
+            barButton2.classList.add('barbutton2Off');
+            barButton2.classList.remove('barbutton2');
+            logo.classList.add('logoOff');
+            logo.classList.remove('logo');
             powerOn = false;
         },800)
 
